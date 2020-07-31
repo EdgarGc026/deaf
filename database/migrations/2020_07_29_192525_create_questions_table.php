@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration{
             $table->text('description');
             $table->text('iframe');
             $table->text('image')->nullable();
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->timestamps();
 
             $table->foreign('exam_id')->references('id')->on('exams')

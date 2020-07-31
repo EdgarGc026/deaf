@@ -22,7 +22,7 @@ class CreateAnswersTable extends Migration
             $table->text('image')->nullable();
             $table->integer('is_correct');
             $table->integer('is_wrong');
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->timestamps();
 
             $table->foreign('question_id')->references('id')->on('questions')

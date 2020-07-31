@@ -19,6 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('ExampleComponent', require('./components/ExampleComponent.vue'));
 Vue.component('modalAnswers', require('./components/modalAnswer.vue'));
 
 /**
@@ -28,5 +29,5 @@ Vue.component('modalAnswers', require('./components/modalAnswer.vue'));
  */
 
 const app = new Vue({
-    el: '#modalComponent',
+    el: '#app',
 });

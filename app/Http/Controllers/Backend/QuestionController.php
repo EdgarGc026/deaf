@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Category;
 use App\Exam;
+use App\Question;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,11 +14,14 @@ class QuestionController extends Controller{
     }
 
     public function create(Exam $exams){
-        return view('question.create', compact('exams'));
+        $category = Category::all();
+        return view('question.create', compact('exams','category'));
     }
 
     public function store(Request $request){
-        //
+        $questions = Question::create($request->all());
+
+        return back()->with('status', 'Creado con exito');
     }
 
     /**
@@ -25,32 +30,20 @@ class QuestionController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function edit(Question $question){
+        $category = Category::all();
+
+        return view('question.create', compact('question', 'category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Question $question){
+        $question = Question::create($request->all());
+
+        return back()->with('status', 'Acutalizado con exito');
     }
 
     /**
