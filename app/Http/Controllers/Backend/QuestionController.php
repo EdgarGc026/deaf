@@ -13,25 +13,32 @@ class QuestionController extends Controller{
         $this->middleware('auth');
     }
 
-    public function create(Exam $exams){
-        $category = Category::all();
-        return view('question.create', compact('exams','category'));
+    public function index(){
+     $questions = Question::all();
+     return view('question.index', compact('questions'));
+
+     /*return view('question.index',[
+        'questions' => Question::all(),
+     ]);*/
     }
 
-    public function store(Request $request){
+    public function create(){
+        $category = Category::all();
+        return view('question.create', compact('category'));
+    }
+
+    public function store(Request $request, Exam $exams){
         $questions = Question::create($request->all());
 
-        return back()->with('status', 'Creado con exito');
+
+
+
+        return view('question.create', compact('exams', 'questions'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id){
-        //
+    public function show(Question $question, Exam $exams){
+        return view('question.show', compact('questions', 'exams'));
+
     }
 
     public function edit(Question $question){

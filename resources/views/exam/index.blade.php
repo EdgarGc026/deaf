@@ -26,7 +26,7 @@
                                     <td>{{$exam->description}}</td>
                                     <td>{{$exam->score}}</td>
                                     <td>
-                                        <a href="/exams/{{$exam->id}}" class="btn btn-success btn-sm" title="Abrir examen"><i class="fas fa-plus-square"></i></a>
+                                        <a href="/questions" class="btn btn-success btn-sm" title="Agregar respuestas"><i class="fas fa-plus-square"></i></a>
                                         <a href="/exams/{{$exam->id}}/edit" class="btn btn-warning btn-sm" title="Editar"><i class="far fa-edit"></i></a>
                                         <a href="/exams/{{$exam->id}}/confirmDelete" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                     </td>

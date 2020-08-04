@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Exam;
 use App\Http\Controllers\Controller;
+use App\Question;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller{
@@ -31,7 +32,7 @@ class ExamController extends Controller{
     }
 
     public function show(Exam $exam){
-        return view('exam.show', compact('exam'));
+//        return view('exam.show', compact('exam'));
     }
 
     public function edit($id){

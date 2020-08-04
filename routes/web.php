@@ -19,12 +19,11 @@ Route::get('/exams/{id}/confirmDelete', 'Backend\ExamController@confirmDelete');
 Route::get('/exams/{exam}', 'Backend\ExamController@show');
 
 Route::resource('/questions', 'Backend\QuestionController');
-Route::get('/exams/{exam}/questions/create', 'Backend\QuestionController@create');
 
 Auth::routes();
+
 //Vista principal
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', 'HomeController@index')->name('home')
-    ->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

@@ -10,14 +10,16 @@
                     </div>
 
                     <div class="card-body">
-                        <form action="/exams/{{$exams->id}}/questions" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+
+                        <form action="/questions" method="POST" enctype="multipart/form-data">
                             @CSRF
                             <div class="form-group">
                                 <label for="description">Descripcion de la pregunta*</label>
                                 <textarea name="description" type="text"
                                           class="form-control" id="description"
                                           aria-describedby="descriptionHelp"
-                                          placeholder="Inserte la pregunta">{{ old('question.description') }}</textarea>
+                                          placeholder="Inserte la pregunta">{{ old('description') }}</textarea>
                                 <small id="descriptionHelp"
                                        class="form-text text-muted">Escribe la descripcion de la pregunta.</small>
                             </div>
@@ -26,7 +28,7 @@
                                 <textarea name="iframe" type="text"
                                           class="form-control" id="iframe"
                                           aria-describedby="iframeHelp"
-                                          placeholder="Inserte la URL del video">{{ old('question.iframe') }}</textarea>
+                                          placeholder="Inserte la URL del video">{{ old('iframe') }}</textarea>
                                 <small id="iframeHelp" class="form-text text-muted">Inserta la url del video.</small>
                             </div>
 
@@ -36,7 +38,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="category">A que categoria pertenece</label>
-                                <select name="category" class="form-control form-control-lg" id="selectCategory">
+                                <select name="category" class="form-control form-control-lg" id="category">
                                     @foreach($category as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -45,14 +47,6 @@
                             </div>
                             <hr />
                             <button type="submit" class="btn btn-primary">Guardar pregunta</button>
-                            {{--<button type="button" class="btn btn-success"
-                                    data-toggle="modal" data-target="#answersModal">
-                                Agregar pregunta
-                            </button>--}}
-                            {{--<option>Pensamiento matematico</option>
-                                    <option>Pensamiento analitico</option>
-                                    <option>Estructura de la lengua</option>
-                                    <option>Comprension lectora</option>--}}
                         </form>
                     </div>
                 </div>
