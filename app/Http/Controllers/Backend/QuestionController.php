@@ -4,63 +4,63 @@ namespace App\Http\Controllers\Backend;
 
 use App\Category;
 use App\Exam;
+use App\Http\Requests\QuestionStoreRequest;
+use App\Http\Requests\QuestionUpdateRequest;
 use App\Question;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class QuestionController extends Controller{
     public function __construct(){
         $this->middleware('auth');
     }
 
-    public function index(){
-     $questions = Question::all();
-     return view('question.index', compact('questions'));
+    public function index($id){
+        $questions = Question::all();
+        $exams = Exam::find($id);
 
-     /*return view('question.index',[
-        'questions' => Question::all(),
-     ]);*/
+        return view('question.index', compact( 'questions', 'exams'));
     }
 
-    public function create(){
-        $category = Category::all();
-        return view('question.create', compact('category'));
+    public function create($id){
+        $exams = Exam::find($id);
+        $category = Category::find($id);
+
+        return view('question.create', compact('category', 'exams'));
     }
 
-    public function store(Request $request, Exam $exams){
-        $questions = Question::create($request->all());
+    public function store(QuestionStoreRequest $request){
 
+        $questions = new Question();
+        $questions->description = $request->get('description');
+        $questions->iframe = $request->get('iframe');
+        $questions->image = $request->get('image');
 
+        $questions->exam_id = $request->get('exam_id');
+        $questions->category_id = $request->get('category_id');
+        /*dd($request->all());*/
+        /*$questions->save();*/
 
-
-        return view('question.create', compact('exams', 'questions'));
+        return view('question.create');
     }
+
 
     public function show(Question $question, Exam $exams){
         return view('question.show', compact('questions', 'exams'));
-
     }
 
     public function edit(Question $question){
         $category = Category::all();
 
-        return view('question.create', compact('question', 'category'));
+        return view('question.edit', compact('question', 'category'));
     }
 
-    public function update(Request $request, Question $question){
+    public function update(QuestionUpdateRequest $request, Question $question){
         $question = Question::create($request->all());
 
         return back()->with('status', 'Acutalizado con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+
     }
 }

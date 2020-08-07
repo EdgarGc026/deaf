@@ -11,6 +11,7 @@
                     <div class="card-body">
                         <form action="/exams" method="POST">
                             @CSRF
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <div class="form-group">
                                 <label for="title">Titulo del examen</label>
                                 <input name="title" type="text" class="form-control"

@@ -6,13 +6,12 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Agregando preguntas al examen
-                        <a href="/exams" class="btn btn-secondary btn-sm float-right">Regresar</a>
+                        <a href="exams/{{$exams->id}}/questions" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
 
                     <div class="card-body">
                         <div class="card-body">
-
-                        <form action="/questions" method="POST" enctype="multipart/form-data">
+                        <form action="exams/{{$exams->id}}/questions/create" method="POST" enctype="multipart/form-data">
                             @CSRF
                             <div class="form-group">
                                 <label for="description">Descripcion de la pregunta*</label>

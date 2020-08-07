@@ -8,12 +8,7 @@ class Exam extends Model{
     protected $fillable = [
         'user_id', 'title', 'description', 'score'
     ];
-
     protected $guarded = [];
-    /**
-     * Nota esta es una relacion de 1 a N
-     * 1 usuario puede tener muchos examenes
-     */
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -23,3 +18,12 @@ class Exam extends Model{
         return $this->hasMany(Question::class);
     }
 }
+/**
+ * Nota esta es una relacion de 1 a N
+ * 1 usuario puede tener muchos examenes
+ */
+
+/*
+ * 1 examen posee muchas categorias
+ * 1:M
+ * */

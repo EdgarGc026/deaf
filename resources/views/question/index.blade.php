@@ -17,9 +17,9 @@
                 </ol>
             </nav>
         </div>
-        <div class="card mb-4 ">
-            <div class="card-header text-center"><span class="text-muted">Preguntas del examen:</span>
-                <a href="/questions/create"
+        <div class="card mb-4">
+            <div class="card-header text-center"><span class="text-muted">Preguntas del examen:</span>{{$exams->title}}
+                <a href="/exams/{{$exams->id}}/questions/create"
                    class="btn btn-success btn-sm float-right"
                    title="Agregar nueva pregunta">
                     Agregar nueva pregunta

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Exam;
 use App\Http\Controllers\Controller;
-use App\Question;
-use Illuminate\Http\Request;
+use App\Http\Requests\ExamStoreRequest;
+use App\Http\Requests\ExamUpdateRequest;
 
 class ExamController extends Controller{
     public function __construct(){
@@ -13,9 +13,11 @@ class ExamController extends Controller{
     }
 
     public function index(){
-        return view('exam.index', [
+        $exams = Exam::all()->where('user_id', auth()->user()->id);
+        return view('exam.index', compact('exams'));
+        /*        return view('exam.index', [
             'exams' => Exam::all()
-        ]);
+        ]);*/
     }
 
     public function create(){
@@ -23,7 +25,7 @@ class ExamController extends Controller{
         return view('exam.create');
     }
 
-    public function store(Request $request){
+    public function store(ExamStoreRequest $request){
         $exams = Exam::create([
             'user_id' => auth()->user()->id
         ] + $request->all());
@@ -31,22 +33,23 @@ class ExamController extends Controller{
         return redirect('/exams');
     }
 
-    public function show(Exam $exam){
-//        return view('exam.show', compact('exam'));
-    }
+    /*public function show(Exam $exam){
+        return view('exam.show', compact('exam'));
+    }*/
 
     public function edit($id){
         $exams = Exam::find($id);
-        return view('exam.edit', [
+        return view('exam.edit', compact('exams'));
+        /*return view('exam.edit', [
             'exams' => $exams
-            ]);
+            ]);*/
     }
 
-    public function update(Request $request, $id){
+    public function update(ExamUpdateRequest $request, $id){
         $exams = Exam::find($id);
         $exams->update($request->all());
-        $exams->save();
 
+        $exams->save();
         return redirect('/exams');
     }
 
