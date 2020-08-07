@@ -6,7 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
-use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller{
     public function __construct(){
@@ -25,29 +25,31 @@ class CategoryController extends Controller{
 
     public function store(CategoryStoreRequest $request){
         $category = Category::create($request->all());
+        $category->save();
 
         return redirect('/categories');
     }
 
-    public function show($id){
+/*    public function show($id){
         $category = Category::find($id);
 
         return view('category.show', compact('category'));
-    }
+    }*/
 
     public function edit($id){
         $category = Category::find($id);
 
-        return view('category.edit',[
+        return view('category.edit', compact('category'));
+        /*return view('category.edit',[
             'category' => $category
-        ]);
+        ]);*/
     }
 
     public function update(CategoryUpdateRequest $request, $id){
         $category = Category::find($id);
         $category->update($request->all());
-        $category->save();
 
+        $category->save();
         return redirect('/categories');
     }
 
@@ -63,5 +65,4 @@ class CategoryController extends Controller{
         $category = Category::find($id)->delete();
         return redirect('/categories');
     }
-
 }
