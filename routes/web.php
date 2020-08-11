@@ -14,16 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Ruta admin */
-Route::resource('/exams', 'Backend\ExamController');
-Route::get('/exams/{id}/confirmDelete', 'Backend\ExamController@confirmDelete');
-Route::get('/exams/{exam}', 'Backend\ExamController@show');
-
-Route::resource('/exams/{exam}/questions', 'Backend\QuestionController');
-
-//Route::resource('/questions', 'Backend\QuestionController');
-
 Route::resource('/categories', 'Backend\CategoryController');
 Route::get('/categories/{id}/confirmDelete', 'Backend\CategoryController@confirmDelete');
+
+Route::resource('/exams', 'Backend\ExamController');
+Route::get('/exams/{id}/confirmDelete', 'Backend\ExamController@confirmDelete');
+
+Route::resource('/exams/{exam}/questions', 'Backend\QuestionController');
 
 Auth::routes();
 

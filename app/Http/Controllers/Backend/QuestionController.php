@@ -23,13 +23,12 @@ class QuestionController extends Controller{
 
     public function create($id){
         $exams = Exam::find($id);
-        $category = Category::find($id);
+        $category = Category::orderBy('id', 'ASC')->get();
 
         return view('question.create', compact('category', 'exams'));
     }
 
     public function store(QuestionStoreRequest $request){
-
         $questions = new Question();
         $questions->description = $request->get('description');
         $questions->iframe = $request->get('iframe');
@@ -37,14 +36,13 @@ class QuestionController extends Controller{
 
         $questions->exam_id = $request->get('exam_id');
         $questions->category_id = $request->get('category_id');
-        /*dd($request->all());*/
-        /*$questions->save();*/
 
-        return view('question.create');
+        $questions->save();
+        return redirect()->route('question.index');
     }
 
 
-    public function show(Question $question, Exam $exams){
+    /*public function show(Question $question, Exam $exams){
         return view('question.show', compact('questions', 'exams'));
     }
 
@@ -62,5 +60,5 @@ class QuestionController extends Controller{
 
     public function destroy($id){
 
-    }
+    }*/
 }

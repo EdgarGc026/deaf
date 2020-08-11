@@ -19,12 +19,12 @@
         </div>
         <div class="card mb-4 ">
             <div class="card-header text-center"><span class="text-muted">Mostrando examen: </span>{{$exam->title}}
-                <a href="/exams/{{$exam->id}}/questions/create"
+                <a href="#"
                    class="btn btn-success btn-sm float-right"
                    title="Agregar nueva pregunta">
                     Agregar nueva pregunta
                 </a>
-                <a href="/exams"
+                <a href="/#"
                    class="btn btn-secondary btn-sm float-left mr-2">
                     Regresar
                 </a>

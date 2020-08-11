@@ -50,7 +50,7 @@
                         @else
                             <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link">Categorias</a></li>
                             <li class="nav-item"><a href="{{ route('exams.index') }}" class="nav-link" >Examenes</a></li>
-                            {{--<li class="nav-item"><a href="{{ route('posts.index') }}" class="nav-link" >Entradas</a></li>--}}
+                            {{--<li class="nav-item"><a href="{{ route('questions.index') }}" class="nav-link" >Preguntas</a></li>--}}
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
