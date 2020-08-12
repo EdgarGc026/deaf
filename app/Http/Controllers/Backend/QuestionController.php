@@ -8,6 +8,7 @@ use App\Http\Requests\QuestionStoreRequest;
 use App\Http\Requests\QuestionUpdateRequest;
 use App\Question;
 use App\Http\Controllers\Controller;
+use function GuzzleHttp\Promise\all;
 
 class QuestionController extends Controller{
     public function __construct(){
@@ -38,7 +39,7 @@ class QuestionController extends Controller{
         $questions->category_id = $request->get('category_id');
 
         $questions->save();
-        return redirect()->route('question.index');
+        return view('question.index');
     }
 
 

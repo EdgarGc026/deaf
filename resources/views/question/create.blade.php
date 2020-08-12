@@ -9,10 +9,18 @@
                         <a href="#" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
                     <div class="card-body">
-                    <form action="exams/{{$exams->id}}/questions" method="POST" enctype="multipart/form-data">
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li> {{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    <form action="/exams/{{$exams->id}}/questions" method="POST" enctype="multipart/form-data">
                         @CSRF
                         <input type="hidden" name="exam_id" value="{{$exams->id}}">
-                        {{--<input type="hidden" name="user_id" value="{{auth()->user()->id}}">--}}
                         <div class="form-group">
                             <label for="description">Descripcion de la pregunta*</label>
                             <textarea name="description" type="text"
@@ -37,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <label for="category">A que categoria pertenece</label>
-                            <select name="category" class="form-control form-control-lg" id="category">
+                            <select name="category_id" class="form-control form-control-lg" id="category_id">
                                 @foreach($category as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
