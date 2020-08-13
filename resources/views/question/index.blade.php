@@ -40,16 +40,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($questions as $question)
                         <tr>
-                            <td>1</td>
-                            <td>Pregunta 1.</td>
-                            <td>Pensamiento Analitico</td>
+                            <td>{{$question->id}}</td>
+                            <td>{{$question->description}}</td>
+                            <td>{{$question->category->name}}</td>
                             <td>
                                 <a href="#" class="btn btn-success btn-sm"><i class="fas fa-plus-square"></i></a>
                                 <a href="#" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

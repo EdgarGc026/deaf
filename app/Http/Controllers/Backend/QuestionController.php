@@ -16,8 +16,9 @@ class QuestionController extends Controller{
     }
 
     public function index($id){
-        $questions = Question::all();
         $exams = Exam::find($id);
+        $questions = Question::find($id)->get();
+
 
         return view('question.index', compact( 'questions', 'exams'));
     }
