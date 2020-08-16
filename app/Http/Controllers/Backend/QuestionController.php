@@ -17,8 +17,7 @@ class QuestionController extends Controller{
 
     public function index($id){
         $exams = Exam::find($id);
-        $questions = Question::find($id)->get();
-
+        $questions = Question::all();
 
         return view('question.index', compact( 'questions', 'exams'));
     }
@@ -43,22 +42,25 @@ class QuestionController extends Controller{
         return view('question.index');
     }
 
+    public function edit($id){
+        $exams = Exam::find($id);
+        $category = Category::find($id)->get();
+        $questions = Question::find($id);
+
+        return view('question.edit', compact('exams','questions', 'category'));
+    }
+
+    public function update(QuestionUpdateRequest $request, $id){
+
+
+        return view('question.index', compact('category', 'questions'));
+    }
 
     /*public function show(Question $question, Exam $exams){
         return view('question.show', compact('questions', 'exams'));
     }
 
-    public function edit(Question $question){
-        $category = Category::all();
 
-        return view('question.edit', compact('question', 'category'));
-    }
-
-    public function update(QuestionUpdateRequest $request, Question $question){
-        $question = Question::create($request->all());
-
-        return back()->with('status', 'Acutalizado con exito');
-    }
 
     public function destroy($id){
 
