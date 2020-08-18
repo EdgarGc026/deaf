@@ -40,20 +40,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($questions as $question)
+                    @foreach($exams->questions as $question)
                         <tr>
-                            @if($question->exam_id == $exams->id)
+                            {{--@if($question->exam_id == $exams->id)--}}
                             <td>{{$question->id}}</td>
                             <td>{{$question->description}}</a></td>
                             <td>{{$question->category->name}}</td>
-
                             <td>
                                 <a href="#" class="btn btn-success btn-sm"><i class="fas fa-plus-square"></i></a>
                                 <a href="/exams/{{$exams->id}}/questions/{{$question->id}}/edit"
                                    class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                             </td>
-                            @endif
+                            {{--@endif--}}
                         </tr>
                     @endforeach
                     </tbody>

@@ -45,7 +45,7 @@ class QuestionController extends Controller{
     public function edit($id){
         $exams = Exam::find($id);
         $category = Category::find($id)->get();
-        $questions = Question::find($id);
+        $questions = Question::all();
 
         return view('question.edit', compact('exams','questions', 'category'));
     }
