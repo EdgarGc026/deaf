@@ -40,15 +40,13 @@ class QuestionController extends Controller{
         $questions->category_id = $request->get('category_id');
 
         $questions->save();
-        return view('question.index', compact('exams'));
+        return redirect()->route('questions.index', $exams->id);
+        /*return view('question.index', compact('exams'));*/
     }
 
     public function edit($id){
-        /*$exams = Exam::find();
-        $category = Category::find();*/
-        $questions = Question::find($id);
 
-        return view('question.edit', compact('questions'));
+        return view('question.edit', compact('questions', 'category' ,'exams'));
     }
 
     public function update(QuestionUpdateRequest $request, $id){

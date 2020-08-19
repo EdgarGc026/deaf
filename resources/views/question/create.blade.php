@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Agregando preguntas al examen
-                        <a href="#" class="btn btn-secondary btn-sm float-right">Regresar</a>
+                        <a href="{{ route('questions.index', $exams->id) }}" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
                     <div class="card-body">
                         @if($errors->any())
@@ -18,7 +18,8 @@
                                 </ul>
                             </div>
                         @endif
-                    <form action="/exams/{{$exams->id}}/questions" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('questions.store', $exams->id) }}" method="POST" enctype="multipart/form-data">
+                        {{--/exams/{{$exams->id}}/questions--}}
                         @CSRF
                         <input type="hidden" name="exam_id" value="{{$exams->id}}">
                         <div class="form-group">

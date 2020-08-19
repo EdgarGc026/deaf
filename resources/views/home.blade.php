@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-header ">Dashboard
                     <a class="btn btn-dark btn-sm float-right"
-                       href="/exams" title="Crear nuevo examen">Ir a examens</a>
+                       href="{{ route('exams.index') }}" title="Crear nuevo examen">Ir a examens</a>
+                        {{--/exams--}}
                 </div>
 
                 <div class="card-body ">

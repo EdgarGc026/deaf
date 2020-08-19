@@ -6,7 +6,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Crear examen
-                        <a href="/exams/create" class="btn btn-dark btn-sm float-right">Crear nuevo examen</a>
+                        <a href="{{ route('exams.create') }}" class="btn btn-dark btn-sm float-right">
+                            Crear nuevo examen</a>
+                        {{--/exams/create--}}
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -26,9 +28,17 @@
                                     <td>{{$exam->description}}</td>
                                     <td>{{$exam->score}}</td>
                                     <td>
-                                        <a href="/exams/{{$exam->id}}/questions" class="btn btn-success btn-sm" title="Agregar respuestas"><i class="fas fa-plus-square"></i></a>
-                                        <a href="/exams/{{$exam->id}}/edit" class="btn btn-warning btn-sm" title="Editar"><i class="far fa-edit"></i></a>
-                                        <a href="/exams/{{$exam->id}}/confirmDelete" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ route('questions.index', $exam->id) }}"
+                                           class="btn btn-success btn-sm"
+                                           title="Agregar respuestas"><i class="fas fa-plus-square"></i></a>
+                                        {{--/exams/{{$exam->id}}/questions--}}
+                                        <a href="{{ route('exams.edit', $exam->id) }}"
+                                           class="btn btn-warning btn-sm"
+                                           title="Editar"><i class="far fa-edit"></i></a>
+                                        {{--/exams/{{$exam->id}}/edit--}}
+                                        <a href="/exams/{{$exam->id}}/confirmDelete" class="btn btn-danger btn-sm"
+                                           title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                                        {{----}}
                                     </td>
                                 </tr>
                             @endforeach

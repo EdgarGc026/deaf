@@ -10,7 +10,8 @@
                         <a href="/exams" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
                     <div class="card-body">
-                        <form action="/exams/{{$exams->id}}" method="POST">
+                        <form action="{{route('exams.destroy', $exams->id)}}" method="POST">
+                            {{--/exams/{{$exams->id}}--}}
                             @Csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿En verdad deseas eliminarlo?')">Eliminar examen</button>

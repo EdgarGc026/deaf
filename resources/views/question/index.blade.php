@@ -7,10 +7,11 @@
                 <ol class="breadcrumb cyan lighten-4">
                     <li class="breadcrumb-item">
                         <a class="black-text" href="/home">Inicio</a>
+                        {{----}}
                         <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
                     </li>
                     <li class="breadcrumb-item">
-                        <a class="black-text" href="/exams">Examen</a>
+                        <a class="black-text" href="{{ route('exams.index') }}">Examen</a>
                         <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
                     </li>
                     <li class="breadcrumb-item active">Visualizar</li>
@@ -19,12 +20,14 @@
         </div>
         <div class="card mb-4">
             <div class="card-header text-center"><span class="text-muted">Preguntas del examen:</span>{{$exams->title}}
-                <a href="/exams/{{$exams->id}}/questions/create"
+                <a href="{{ route('questions.create', $exams->id) }}"
+                   {{--/exams/{{$exams->id}}/questions/create--}}
                    class="btn btn-success btn-sm float-right"
                    title="Agregar nueva pregunta">
                     Agregar nueva pregunta
                 </a>
-                <a href="/exams"
+                <a href="{{ route('exams.index') }}"
+                   {{--/exams--}}
                    class="btn btn-secondary btn-sm float-left mr-2">
                     Regresar
                 </a>
@@ -47,7 +50,8 @@
                             <td>{{$question->category->name}}</td>
                             <td>
                                 <a href="#" class="btn btn-success btn-sm"><i class="fas fa-plus-square"></i></a>
-                                <a href="/exams/{{$exams->id}}/questions/{{$question->id}}/edit"
+                                <a href="{{ route('questions.edit', [$exams->id, $question->id]) }}"
+                                   {{--/exams/{{$exams->id}}/questions/{{$question->id}}/edit--}}
                                    class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                             </td>
