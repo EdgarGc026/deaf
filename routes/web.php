@@ -21,7 +21,7 @@ Route::resource('/exams', 'Backend\ExamController');
 Route::get('/exams/{id}/confirmDelete', 'Backend\ExamController@confirmDelete');
 
 /*Route::resource('/exams/{exam}/questions', 'Backend\QuestionController')*/
-Route::get('/exams/{exam}/questions_index', 'Backend\QuestionController@index');
+Route::get('/exams/{exam}/questions', 'Backend\QuestionController@index');
 Route::get('/exams/{exam}/questions/create', 'Backend\QuestionController@create');
 Route::get('/exams/{exam}/questions/{id}/edit', 'Backend\QuestionController@edit');
 

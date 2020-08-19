@@ -42,7 +42,6 @@
                     <tbody>
                     @foreach($exams->questions as $question)
                         <tr>
-                            {{--@if($question->exam_id == $exams->id)--}}
                             <td>{{$question->id}}</td>
                             <td>{{$question->description}}</a></td>
                             <td>{{$question->category->name}}</td>
@@ -52,7 +51,6 @@
                                    class="btn btn-warning btn-sm"><i class="far fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                             </td>
-                            {{--@endif--}}
                         </tr>
                     @endforeach
                     </tbody>

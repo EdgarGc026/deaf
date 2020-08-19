@@ -19,8 +19,9 @@
                             </div>
                         @endif
                     <form action="/exams/{{$exams->id}}/questions" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="exam_id" value="{{$exams->id}}">
+
                         <div class="form-group">
+                            <input type="hidden" name="question_id" value="{{$questions->id}}">
                             <label for="description">Descripcion de la pregunta*</label>
                             <textarea name="description" type="text"
                                       class="form-control" id="description"
