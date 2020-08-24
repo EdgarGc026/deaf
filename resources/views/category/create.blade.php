@@ -6,10 +6,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Crear categoria
-                        <a href="/categories" class="btn btn-secondary btn-sm float-right">Regresar</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
                     <div class="card-body">
-                        <form action="/categories" method="post">
+                        <form action="{{ route('categories.store') }}" method="post">
                             @CSRF
                             <div class="form-group">
                                 <label for="name">Nombre de la categoria</label>

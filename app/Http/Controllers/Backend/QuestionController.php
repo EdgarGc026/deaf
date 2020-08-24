@@ -19,7 +19,7 @@ class QuestionController extends Controller{
         $exams = Exam::find($id);
         $questions = Question::all();
 
-        return view('question.index', compact( 'questions', 'exams'));
+        return view('question.index', compact('exams', 'questions'));
     }
 
     public function create($id){
@@ -29,8 +29,7 @@ class QuestionController extends Controller{
         return view('question.create', compact('category', 'exams'));
     }
 
-    public function store(QuestionStoreRequest $request, $id){
-        $exams = Exam::find($id);
+    public function store(QuestionStoreRequest $request){
         $questions = new Question();
         $questions->description = $request->get('description');
         $questions->iframe = $request->get('iframe');
@@ -40,19 +39,29 @@ class QuestionController extends Controller{
         $questions->category_id = $request->get('category_id');
 
         $questions->save();
-        return redirect()->route('questions.index', $exams->id);
-        /*return view('question.index', compact('exams'));*/
+        return redirect()->route('questions.index', $questions->exam_id);
+
     }
 
-    public function edit($id){
+    public function edit($examId, $questionId){
+        $exams = Exam::find($examId);
+        $questions = Question::find($questionId);
+        $category = Category::all();
 
-        return view('question.edit', compact('questions', 'category' ,'exams'));
+        return view('question.edit', compact('exams', 'questions', 'category'));
     }
 
-    public function update(QuestionUpdateRequest $request, $id){
-        $questions = Question::find($id);
+    public function update(QuestionUpdateRequest $request, $examId, $questionId){
+        $exams = Exam::find($examId);
+        $questions = Question::find($questionId);
+        $questions->description = $request->get('description');
+        $questions->iframe = $request->get('iframe');
+        $questions->image = $request->get('image');
 
-        return view('question.index', compact('category', 'questions'));
+        $questions->exam_id = $examId;
+        $questions->category_id = $request->get('category_id');
+        $questions->save();
+        return redirect()->route('questions.index', $questions->exam_id);
     }
 
     /*public function show(Question $question, Exam $exams){

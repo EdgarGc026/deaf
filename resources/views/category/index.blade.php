@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Categoria para las preguntas
-                        <a href="categories/create" class="btn btn-dark btn-sm float-right">Crear nueva categoria</a>
+                        <a href="{{ route('categories.create') }}" class="btn btn-dark btn-sm float-right">Crear nueva categoria</a>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -22,7 +22,7 @@
                                     <td>{{$category->id}}</td>
                                     <td>{{$category->name}}</td>
                                     <td>
-                                        <a href="/categories/{{$category->id}}/edit" class="btn btn-warning btn-sm" title="Editar"><i class="far fa-edit"></i></a>
+                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm" title="Editar"><i class="far fa-edit"></i></a>
                                         <a href="/categories/{{$category->id}}/confirmDelete" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

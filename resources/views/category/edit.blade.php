@@ -6,10 +6,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><span class="text-muted">Editanto la categoria: </span>{{$category->name}}
-                        <a href="/categories" class="btn btn-secondary btn-sm float-right">Regresar</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-secondary btn-sm float-right">Regresar</a>
                     </div>
                     <div class="card-body">
-                        <form action="/categories/{{ $category->id }}" method="post">
+                        <form action="{{ route('categories.update') }}" method="post">
                             @CSRF
                             @method('PUT')
 

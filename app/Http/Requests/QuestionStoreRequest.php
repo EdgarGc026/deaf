@@ -21,7 +21,7 @@ class QuestionStoreRequest extends FormRequest{
      */
     public function rules(){
         $rules = [
-            'exam_id' => 'required|integer',
+//            'exam_id' => 'required|integer',
             'category_id' => 'required|integer',
             'description' => 'required|min:3',
             'iframe' => 'required'
