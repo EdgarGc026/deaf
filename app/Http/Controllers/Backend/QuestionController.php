@@ -53,6 +53,7 @@ class QuestionController extends Controller{
 
     public function update(QuestionUpdateRequest $request, $examId, $questionId){
         $exams = Exam::find($examId);
+
         $questions = Question::find($questionId);
         $questions->description = $request->get('description');
         $questions->iframe = $request->get('iframe');
@@ -61,16 +62,29 @@ class QuestionController extends Controller{
         $questions->exam_id = $examId;
         $questions->category_id = $request->get('category_id');
         $questions->save();
+
         return redirect()->route('questions.index', $questions->exam_id);
     }
 
-    /*public function show(Question $question, Exam $exams){
-        return view('question.show', compact('questions', 'exams'));
+    public function show($examId, $questionId){
+        $exams = Exam::find($examId);
+        $questions = Question::find($questionId);
+        $category = Category::all();
+
+        return view('question.show', compact('exams', 'questions', 'category'));
     }
 
+    public function destroy($examId, $questionId){
+        $exams = Exam::find($examId);
+        $questions = Question::find($questionId);
+        $questions->delete();
+        return redirect()->route('questions.index', $questions->exam_id);
+    }
 
+    public function confirmDelete($examId, $questionId){
+        $exams = Exam::find($examId);
+        $questions = Question::find($questionId);
 
-    public function destroy($id){
-
-    }*/
+        return view('question.confirmDelete', compact('exams', 'questions'));
+    }
 }

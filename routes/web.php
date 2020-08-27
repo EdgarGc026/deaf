@@ -20,17 +20,27 @@ Route::get('/categories/{id}/confirmDelete', 'Backend\CategoryController@confirm
 Route::resource('/exams', 'Backend\ExamController');
 Route::get('/exams/{id}/confirmDelete', 'Backend\ExamController@confirmDelete');
 
+
 Route::resource('/exams/{exam}/questions', 'Backend\QuestionController');
-Route::get('/exams/{exam}/questions/{id}/edit', function ($examId, $questionId){})->name('questions.edit');
-/*Route::get('/exams/{exam}/questions', 'Backend\QuestionController@index');
-Route::get('/exams/{exam}/questions/create', 'Backend\QuestionController@create')
+Route::get('/exams/{exam}/questions/{id}/edit', function ($examId, $questionId){})
+    ->name('questions.edit');
+Route::get('/exams/{exam}/questions/{id}', function ($examId, $questionId){})
+    ->name('questions.show');
+Route::get('/exams/{exam}/questions/{id}/confirmDelete', 'Backend\QuestionController@confirmDelete')
+    ->name('questions.confirmDelete');
 
 
-Route::put('/exams/{exam}/questions/{id}', 'Backend\QuestionController@update');
-Route::post('/exams/{exam}/questions', 'Backend\QuestionController@store');*/
+Route::resource('/exams/{exam}/questions/{question}/answers', 'Backend\AnswerController');
+Route::get('/exams/{exam}/questions/{id}/answers',
+  function ($questionId){})
+  ->name('answers.index');
+
+Route::get('/exams/{exam}/questions/{question}/answers/{id}/confirmDelete',
+    'Backend\AnswerController@confirmDelete')
+    ->name('answers.confirmDelete');
+
 
 Auth::routes();
-
 //Vista principal
 Route::get('/', function () {
     return view('welcome');

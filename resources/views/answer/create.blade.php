@@ -1,39 +1,80 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="modal fade" id="answersModal" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Agregando respuestas</h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <h4 class="text-center">Respuesta #</h4>
-                        <div class="form-group">
-                            <label for="description">Descripcion</label>
-                            <input type="text" class=" form-control input-group-sm" name="" id="" placeholder="Ingresa la respuesta">
-                        </div>
+    <div class="container">
+        <div class="breadcrumb-main mt-1">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb cyan lighten-4">
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="/home">Inicio</a>
+                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="black-text" href="{{ route('exams.index') }}">Examen</a>
+                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="text-black" href="{{ route('questions.index', [$exams->id])}}">Question</a>
+                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                    </li>
+                    <li class="breadcrumb-item active">Visualizar</li>
+                </ol>
+            </nav>
+        </div>
 
-                        <div class="form-group">
-                            <label for="iframe">Video</label>
-                            <textarea class="form-control input-group-sm" name="" id="" placeholder="Link del video"></textarea>
-                        </div>
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <span class="text-muted"> Respuesta #</span>
+                <a href="{{ route('answers.index', [$exams->id, $questions->id]) }}" class="btn btn-sm btn-secondary float-left mr-2">Regresar</a>
+            </div>
+            <div class="card-body">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li> {{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="descriptionHelp">Descripcion</label>
+                        <textarea name="description" type="text"
+                                  class="form-control" id="description"
+                                  aria-describedby="descriptionHelp"
+                                  placeholder="Inserte la respuesta">{{ old('description') }}</textarea>
+                        <small id="descriptionHelp"
+                               class="form-text text-muted">Escribe la descripcion de la respuesta.</small>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="image">Imagen</label>
-                            <input name="image" type="file" class="input-group py-1">
+                    <div class="form-group">
+                        <label for="iframeHelp">Link del Video</label>
+                        <textarea name="iframe" type="text"
+                                  class="form-control" id="iframe"
+                                  aria-describedby="iframeHelp"
+                                  placeholder="Inserte el video">{{ old('iframe') }}</textarea>
+                        <small id="descriptionHelp"
+                               class="form-text text-muted">Escribe la descripcion de la pregunta.</small>
+                    </div>
+
+                    <div class="form-group d-flex flex-column">
+                        <label for="image">Imagen asociada</label>
+                        <input name="image" type="file" class="py-1">
+                    </div>
+
+                    <div class="form-group">
+                        <legend>Opciones</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="is_correct" value="" id="is_correct">
+                            <label class="form-check-label" for="correctHelp">
+                                Es correcta
+                            </label>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="disabled btn btn-secondary"><i class="fas fa-arrow-left"> Atras</i></button>
-                    <button class="btn btn-primary">Siguiente <i class="fas fa-arrow-right"></i></button>
-                </div>
+                    </div>
+                    @CSRF
+                    <button class="btn btn-primary" type="submit">Guardar respuesta</button>
+                </form>
             </div>
         </div>
     </div>
