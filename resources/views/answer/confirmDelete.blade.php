@@ -6,7 +6,7 @@
       <div class="col col-md-12">
         <div class="card">
           <div class="card-header">
-            <span>Eliminar respuesta:{{$exams->id}} </span>
+            <span>Eliminar respuesta:{{$answers->description}} </span>
             <a href="{{ route('questions.index', [$exams->id, $questions->id, $answers->id]) }}"
                class="btn btn-secondary btn-sm float-right">Regresar</a>
           </div>

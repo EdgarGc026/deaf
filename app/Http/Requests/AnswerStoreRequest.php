@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionStoreRequest extends FormRequest{
+class AnswerStoreRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -21,16 +22,15 @@ class QuestionStoreRequest extends FormRequest{
      */
     public function rules(){
         $rules = [
-//            'exam_id' => 'required|integer',
-            'category_id' => 'required|integer',
-            'description' => 'required|min:3',
-            'iframe' => 'required',
+          'description' => 'required|min:3',
+          'iframe' => 'required',
+          'is_correct' => 'required'
         ];
 
-        if($this->get('image')){
-            $rules = array_merge($rules, ['image' => 'mime:jpg,jpeg,png']);
-        }
+      if($this->get('image')){
+        $rules = array_merge($rules, ['image' => 'mime:jpg,jpeg,png']);
+      }
 
-        return $rules;
+      return $rules;
     }
 }

@@ -19,17 +19,17 @@ class CreateQuestionsTable extends Migration{
             $table->text('description');
             $table->text('iframe');
             $table->text('image')->nullable();
-            $table->integer('order')->nullable();
             $table->timestamps();
 
             $table->foreign('exam_id')->references('id')->on('exams')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+              ->onDelete('cascade')
+              ->onUpdate('cascade');
 
             $table->foreign('category_id')->references('id')->on('categories')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+              ->onDelete('cascade')
+              ->onUpdate('cascade');
         });
+
     }
 
     /**
@@ -39,5 +39,10 @@ class CreateQuestionsTable extends Migration{
      */
     public function down(){
         Schema::dropIfExists('questions');
+     /* Schema::table('questions', function (Blueprint $table){
+        $table->dropForeign('questions_exam_id_foreign');
+        $table->dropForeign('questions_category_id_foreign');
+      });*/
+
     }
 }

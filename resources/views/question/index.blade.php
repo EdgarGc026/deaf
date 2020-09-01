@@ -10,7 +10,7 @@
                         <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
                     </li>
                     <li class="breadcrumb-item">
-                        <a class="black-text" href="{{ route('exams.index') }}">Examen</a>
+                        <a class="black-text" href="{{ route('exams.index', [$exams->id]) }}">Examen</a>
                         <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
                     </li>
                     <li class="breadcrumb-item">
@@ -47,10 +47,7 @@
                     @foreach($exams->questions as $question)
                         <tr>
                             <td>{{$question->id}}</td>
-                            <td>
-                                <a href="{{ route('questions.show', [$exams->id, $question->id]) }}"
-                                >{{$question->description}}</a>
-                            </td>
+                            <td>{{$question->description}}</td>
                             <td>{{$question->category->name}}</td>
                             <td>
                                 <a href="{{ route('answers.index', [$exams->id, $question->id]) }}" class="btn btn-success btn-sm"><i class="fas fa-plus-square"></i></a>

@@ -45,7 +45,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                  @foreach($answers as $answer)
+                    @foreach($questions->answers as $answer)
                       <tr>
                           <td>{{ $answer->id }}</td>
                           <td>{{ $answer->description }}</td>
@@ -58,10 +58,10 @@
                               </a>
                           </td>
                       </tr>
-                  @endforeach
+                      @endforeach
                   </tbody>
               </table>
           </div>
       </div>
   </div>
-@endsection
+  @endsection

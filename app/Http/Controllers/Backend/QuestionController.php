@@ -11,80 +11,77 @@ use App\Http\Controllers\Controller;
 use function GuzzleHttp\Promise\all;
 
 class QuestionController extends Controller{
-    public function __construct(){
-        $this->middleware('auth');
-    }
+  public function __construct(){
+    $this->middleware('auth');
+  }
+  public function index($id){
+      $exams = Exam::find($id);
+      $questions = Question::all();
+      return view('question.index', compact('exams', 'questions'));
+  }
 
-    public function index($id){
-        $exams = Exam::find($id);
-        $questions = Question::all();
+  public function create($id){
+      $exams = Exam::find($id);
+      $category = Category::orderBy('id', 'ASC')->get();
 
-        return view('question.index', compact('exams', 'questions'));
-    }
+      return view('question.create', compact('category', 'exams'));
+  }
 
-    public function create($id){
-        $exams = Exam::find($id);
-        $category = Category::orderBy('id', 'ASC')->get();
+  public function store(QuestionStoreRequest $request){
+      $questions = new Question();
+      $questions->description = $request->get('description');
+      $questions->iframe = $request->get('iframe');
+      $questions->image = $request->get('image');
 
-        return view('question.create', compact('category', 'exams'));
-    }
+      $questions->exam_id = $request->get('exam_id');
+      $questions->category_id = $request->get('category_id');
 
-    public function store(QuestionStoreRequest $request){
-        $questions = new Question();
-        $questions->description = $request->get('description');
-        $questions->iframe = $request->get('iframe');
-        $questions->image = $request->get('image');
+      $questions->save();
+      return redirect()->route('questions.index', $questions->exam_id);
+  }
 
-        $questions->exam_id = $request->get('exam_id');
-        $questions->category_id = $request->get('category_id');
+  public function edit($examId, $questionId){
+      $exams = Exam::find($examId);
+      $questions = Question::find($questionId);
+      $category = Category::all();
 
-        $questions->save();
-        return redirect()->route('questions.index', $questions->exam_id);
+      return view('question.edit', compact('exams', 'questions', 'category'));
+  }
 
-    }
+  public function update(QuestionUpdateRequest $request, $examId, $questionId){
+      $exams = Exam::find($examId);
 
-    public function edit($examId, $questionId){
-        $exams = Exam::find($examId);
-        $questions = Question::find($questionId);
-        $category = Category::all();
+      $questions = Question::find($questionId);
+      $questions->description = $request->get('description');
+      $questions->iframe = $request->get('iframe');
+      $questions->image = $request->get('image');
 
-        return view('question.edit', compact('exams', 'questions', 'category'));
-    }
+      $questions->exam_id = $examId;
+      $questions->category_id = $request->get('category_id');
+      $questions->save();
 
-    public function update(QuestionUpdateRequest $request, $examId, $questionId){
-        $exams = Exam::find($examId);
+      return redirect()->route('questions.index', $questions->exam_id);
+  }
 
-        $questions = Question::find($questionId);
-        $questions->description = $request->get('description');
-        $questions->iframe = $request->get('iframe');
-        $questions->image = $request->get('image');
+  public function show($examId, $questionId){
+      $exams = Exam::find($examId);
+      $questions = Question::find($questionId);
+      $category = Category::all();
 
-        $questions->exam_id = $examId;
-        $questions->category_id = $request->get('category_id');
-        $questions->save();
+      return view('question.show', compact('exams', 'questions', 'category'));
+  }
 
-        return redirect()->route('questions.index', $questions->exam_id);
-    }
+  public function destroy($examId, $questionId){
+      $exams = Exam::find($examId);
+      $questions = Question::find($questionId);
+      $questions->delete();
+      return redirect()->route('questions.index', $questions->exam_id);
+  }
 
-    public function show($examId, $questionId){
-        $exams = Exam::find($examId);
-        $questions = Question::find($questionId);
-        $category = Category::all();
+  public function confirmDelete($examId, $questionId){
+      $exams = Exam::find($examId);
+      $questions = Question::find($questionId);
 
-        return view('question.show', compact('exams', 'questions', 'category'));
-    }
-
-    public function destroy($examId, $questionId){
-        $exams = Exam::find($examId);
-        $questions = Question::find($questionId);
-        $questions->delete();
-        return redirect()->route('questions.index', $questions->exam_id);
-    }
-
-    public function confirmDelete($examId, $questionId){
-        $exams = Exam::find($examId);
-        $questions = Question::find($questionId);
-
-        return view('question.confirmDelete', compact('exams', 'questions'));
-    }
+      return view('question.confirmDelete', compact('exams', 'questions'));
+  }
 }

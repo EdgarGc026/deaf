@@ -14,7 +14,7 @@ class CreateExamsTable extends Migration{
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-//            $table->unsignedBigInteger('admin_id');
+
 
             $table->string('title',250);
             $table->text('description');
@@ -31,6 +31,10 @@ class CreateExamsTable extends Migration{
      * @return void
      */
     public function down(){
-        Schema::dropIfExists('exams');
+      Schema::dropIfExists('exams');
+/*        Schema::table('exams', function (Blueprint $table){
+          $table->dropForeign(['user_id']);
+        });*/
+
     }
 }

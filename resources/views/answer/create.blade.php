@@ -1,31 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="breadcrumb-main mt-1">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb cyan lighten-4">
-                    <li class="breadcrumb-item">
-                        <a class="black-text" href="/home">Inicio</a>
-                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="black-text" href="{{ route('exams.index') }}">Examen</a>
-                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="text-black" href="{{ route('questions.index', [$exams->id])}}">Question</a>
-                        <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
-                    </li>
-                    <li class="breadcrumb-item active">Visualizar</li>
-                </ol>
-            </nav>
-        </div>
+  <div class="container">
+      <div class="breadcrumb-main mt-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb cyan lighten-4">
+                <li class="breadcrumb-item">
+                    <a class="black-text" href="/home">Inicio</a>
+                    <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="black-text" href="{{ route('exams.index') }}">Examen</a>
+                    <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="text-black" href="{{ route('questions.index', [$exams->id])}}">Question</a>
+                    <i class="fas fa-angle-double-right mx-2" aria-hidden="true"></i>
+                </li>
+                <li class="breadcrumb-item active">Visualizar</li>
+            </ol>
+        </nav>
+      </div>
 
         <div class="card mb-4">
             <div class="card-header text-center">
-                <span class="text-muted"> Respuesta #</span>
-                <a href="{{ route('answers.index', [$exams->id, $questions->id]) }}" class="btn btn-sm btn-secondary float-left mr-2">Regresar</a>
+                <span class="text-muted"> Respuesta a</span> {{ $questions->description }}
+                <a href="{{ route('answers.index', [$exams->id, $questions->id]) }}"
+                   class="btn btn-sm btn-secondary float-left mr-2">
+                  Regresar
+                </a>
             </div>
             <div class="card-body">
                 @if($errors->any())
@@ -37,7 +40,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="#" method="POST">
+                <form action="{{ route('answers.store', [$exams->id, $questions->id]) }}" method="POST">
                     <div class="form-group">
                         <label for="descriptionHelp">Descripcion</label>
                         <textarea name="description" type="text"
@@ -64,18 +67,17 @@
                     </div>
 
                     <div class="form-group">
-                        <legend>Opciones</legend>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_correct" value="" id="is_correct">
-                            <label class="form-check-label" for="correctHelp">
-                                Es correcta
-                            </label>
-                        </div>
+                      <label>Opciones</label>
+                      <select name="is_correct" id="is_correct" class="form-control">
+                        <option value="" disabled>Selecciona la opcion</option>
+                        <option value="1">Correcta</option>
+                        <option value="0">Incorrecta</option>
+                      </select>
                     </div>
                     @CSRF
-                    <button class="btn btn-primary" type="submit">Guardar respuesta</button>
+                    <button type="submit" class="btn btn-primary">Guardar respuesta</button>
                 </form>
             </div>
         </div>
-    </div>
+  </div>
 @endsection

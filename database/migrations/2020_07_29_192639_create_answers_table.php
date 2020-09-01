@@ -11,8 +11,7 @@ class CreateAnswersTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('question_id');
@@ -21,8 +20,6 @@ class CreateAnswersTable extends Migration
             $table->text('iframe');
             $table->text('image')->nullable();
             $table->integer('is_correct');
-            $table->integer('is_wrong');
-            $table->integer('order')->nullable();
             $table->timestamps();
 
             $table->foreign('question_id')->references('id')->on('questions')
@@ -36,8 +33,10 @@ class CreateAnswersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('answers');
+      /*Schema::table('answers', function (Blueprint $table){
+        $table->dropForeign('answers_question_id_foreign');
+      });*/
     }
 }
